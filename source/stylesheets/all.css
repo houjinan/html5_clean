@@ -15,9 +15,11 @@ body {
 
 .content-left{
   float:left;
+  height:100%;
   width:20%;
 }
 
 .content-right{
+  float:left;
   width:80%;
 }

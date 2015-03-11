@@ -1,0 +1,21 @@
+---
+title: audio
+layout: layout
+---
+
+<br>
+<div width="100%">
+<div id= "support"></div>
+</div>
+
+<script type="text/javascript">
+function loadDemo(){
+  if(typeof(Worker) !== "undefined"){
+    document.getElementById("support").innerHTML = "Excellent! Your brower supports HTML5 Web Workers";
+  }else{
+    document.getElementById("support").innerHTML = "Excellent! Your brower not supports HTML5 Web Workers";
+  }
+}
+
+  window.addEventListener("load", loadDemo, false);
+</script>
