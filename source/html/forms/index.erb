@@ -1,0 +1,49 @@
+---
+title: audio
+layout: layout
+---
+
+<br>
+<div width="100%">
+  <form>
+    <input type="tel"  minLength="8" maxLength="20" required /><br>
+    <input type="email" required/><br>
+    <input type="url"/><br>
+    <input type="search"/><br>
+    <label for="age">Age</label>
+    <input id="age" type="range" min="10" max="100" step="5" onchange="showValue(this.value)" />
+    <span id="ageDisply"></span>
+    <br>
+    <label>Runner: <input mame="name" placeholder="First and last name" autofocus required/></label>
+    <br>
+    <label>Runner: <input mame="money" autocomplete="off" required/></label>
+    <br>
+    <input type="email" id="contacts" list="contactlist">
+    <datalist id="contactlist">
+      <option value="x@example.com" label="Racer X">
+      <option value="peter@example.com" label="Peter">
+    </datalist>
+
+    <button type="submit">submit</button>
+  </form>
+</div>
+
+
+<script>
+  //document.getElementById("age").valueAsNumber(10);
+  function showValue(newVal){
+    document.getElementById("ageDisply").innerHTML=newVal;
+  }
+
+  function invalidHandler(evt){
+    var validity= evt.srcElement.validity;
+    if(validity.valueMissing){
+      alert("valueMissing");
+    }
+
+    evt.preventDefault();
+
+  }
+
+  myField.addEventListener("invalid", invalidHandler, false);
+</script>

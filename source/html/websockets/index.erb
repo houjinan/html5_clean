@@ -1,0 +1,58 @@
+---
+title: audio
+layout: layout
+---
+
+<br>
+<div width="100%">
+  <p>Html5 WebSockets 是最强大的通信功能，它定义了一个全双工通信信道，仅通过Web上的一个Socket即可进行通信。WebSockets 不仅仅是对常规HTTP通信的另一种增量加强，它更代表着一次巨大的进步，对空时的、事件驱动的web应用程序而言更是如此。</p>
+
+  <div id="support"></div>
+  <div>
+    <input type="text" id="inputMessage" value="Hello, WebSocket!"/>
+    <button name="Send" value="Send" id="sendButton">Send</button>
+  </div>
+  <pre id="output"></pre>
+</div>
+<script>
+  if(window.WebSocket){
+    document.getElementById("support").innerHTML = "Html5 WebSocket is support in your browser.";
+  }else{
+    document.getElementById("support").innerHTML = "Html5 WebSocket is not support in your browser.";
+  }
+  var log = function(s){
+    if(document.readyState !== "complete"){
+      log.buffer.push(s);
+    }else{
+      document.getElementById("output").innerHTML += (s+"\n");
+    }
+  }
+  log.buffer = [];
+
+  url = "ws:inkash.test.soundink.net/socket/users/55?version=v1";
+  w = new WebSocket(url);
+  w.onopen = function(){
+    log("open");
+    w.send("thank you for accepting this WebSocket request");
+  }
+
+  w.onmessage = function(e){
+      log(e.data);
+      resultJson = eval("(" + e.data + ")");
+      if(resultJson.response.type=="ping"){
+        w.send('{"version": "v1", "request":{"type": "pong"}}');
+      }
+  }
+
+  w.onclose = function(e){
+    log("closed");
+  }
+
+  window.onload = function(){
+    log(log.buffer.join("\n"));
+    document.getElementById("sendButton").onclick = function(){
+      w.send(document.getElementById("inputMessage").value);
+    }
+  }
+
+</script>

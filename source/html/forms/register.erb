@@ -1,0 +1,94 @@
+---
+title: audio
+layout: layout
+---
+
+<br>
+<div width="100%">
+  <form name="register">
+    <p>
+      <lable for="runnername" id ="label_runnername">Runner:</lable>
+      <input id="runnername" name="runnername" type="text" placeholder="First and last name" required>
+    </p>
+
+    <p>
+      <lable for="phone">Tel #:</lable>
+      <input id="phone" name="phone" type="tel" placeholder="(xxx) xxx-xxx">
+    </p>
+
+    <p>
+      <lable for="emailaddress">E-mail:</lable>
+      <input id="emailaddress" name="emailaddress" type="email" placeholder="For confirmation only">
+    </p>
+
+    <p>
+      <lable for="dob">DOB:</lable>
+      <input id="dob" name="dob" type="date" placeholder="MM/DD/YYYY">
+    </p>
+
+    <fieldset>
+        <legend>T-shirt Size:</legend>
+        <p>
+          <input id="small" name="tshirt" type="radio" value="small" checked >
+          <lable for="small">Small</lable>
+        </p>
+        <p>
+          <input id="medium" name="tshirt" type="radio" value="medium">
+          <lable for="medium">Medium</lable>
+        </p>
+        <p>
+          <input id="large" name="tshirt" type="radio" value="large">
+          <lable for="large">Large</lable>
+        </p>
+        <p>
+          <input id="style" name="style" type="test" list="stylelist" title="Years of participation">
+        </p>
+        <datalist id="stylelist">
+          <option value="White" label="1st Year">
+          <option value="Gray" label="2nd - 4th Year">
+          <option value="Navy" label="Veteran (5+ Years)">
+        </datalist>  
+    </fieldset>
+
+    <fieldset>
+      <legend>Expectations:</legend>
+      <p>
+        <label for="confidence">Confidence:</label>
+        <input id="confidence" name="level" type="range" onchange="setConfidence(this.value)" value="50" min="0" max="100" step="5">
+        <span id="confidenceDisplay">50%</span>
+      </p>
+      <p>
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="notes" maxlength="140"></textarea>
+      </p>
+    </fieldset>
+
+    <p>
+      <input type="submit" name="register" value="Register">
+    </p>
+  </form>
+</div>
+
+
+<script type="text/javascript">
+  function setConfidence(newVal){
+    document.getElementById("confidenceDisplay").innerHTML = newVal +"%";
+  }
+
+  function invalidHandler(evt){
+    alert(0);
+    var label = evt.srcElement.parentElement.getElementsByTagName("label")[0];
+
+    document.getElementById("label_runnername").style.color = 'red';
+
+    evt.stopPropagation();
+
+    evt.preventDefault();
+  }
+
+  function loadDemo(){
+    document.register.addEventListener("invalid", invalidHandler, true);
+  }
+
+  window.addEventListener("load", loadDemo, false);
+</script>
